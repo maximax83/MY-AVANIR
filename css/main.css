@@ -1,0 +1,356 @@
+/* Подключение шрифтов */
+@font-face {
+	font-family: 'SpaceGrotesk';
+	src: local('?'),
+		url(../fonts/SpaceGrotesk-Regular.woff2) format('woff2'),
+		url(../fonts/SpaceGrotesk-Regular.woff) format('woff');
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: '';
+	src: local('?'),
+		url(../fonts/SpaceGrotesk-SemiBold.woff2) format('woff2'),
+		url(../fonts/SpaceGrotesk-SemiBold.woff) format('woff');
+		font-weight: 600;
+}
+
+@font-face {
+	font-family: '';
+	src: local('?'),
+		url(../fonts/SpaceGrotesk-Bold.woff2) format('woff2'),
+		url(../fonts/SpaceGrotesk-Bold.woff) format('woff');
+		font-weight: bold;
+}
+
+/* Сброс/нормализация стилей */
+html {
+	-webkit-text-size-adjust: 100%;
+}
+
+body {margin: 0;}
+
+h1,h2,h3,h4,h5,h6 {
+	font: inherit;
+	font-size: inherit;
+	font-weight: normal;
+	margin: 0;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+img {vertical-align: top;}
+
+p {margin: 0;}
+
+ol, ul {
+	margin: 0;
+	padding-left: 0;
+	list-style: none;
+}
+
+html {
+	box-sizing: border-box;
+}
+
+*,*::before,*::after {
+	box-sizing: inherit;
+}
+
+
+
+
+
+.page {
+	background: #fff;
+	font: 16px/1.35 SpaceGrotesk, sans-serif;
+	color: #171717;
+}
+
+
+
+
+
+/* start Шапка страницы */
+.header {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: flex-start;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	background: #171717;
+	color: #fff;
+}
+
+.header__logo {
+	margin: 8px 40px 8px 32px;
+	font-weight: bold;
+	font-size: 24px;
+}
+
+.burger {
+	display: none;
+	position: relative;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+.burger:before,
+.burger__center-line,
+.burger:after {
+	content: '';
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 20%;
+	background: #fff;
+	transition: transform 0.3s, top 0.3s 0.3s, bottom 0.3s 0.3s;
+}
+
+.burger:before {
+	top: 0;
+}
+
+.burger__center-line {
+	top: 40%;
+}
+
+.burger:after {
+	bottom: 0;
+}
+
+.nav {
+	margin: 0 auto 0 0;
+}
+
+.nav__menu {
+	display: flex;
+	text-transform: uppercase;
+}
+
+.nav__item {
+	position: relative;
+	padding: 12px;
+	cursor: pointer;
+}
+
+.nav__item.item-active {
+	background: #fff;
+	color: #171717;
+}
+
+.nav__item:after {
+	content: '';
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin: 0 0 0 10px;
+	background: url(../img/marker-expand.svg) no-repeat center/contain;
+}
+
+.nav__item.item-active:after {
+	background: url(../img/marker-collapse.svg) no-repeat center/contain;
+}
+
+.nav__item_link:after {
+	display: none;
+}
+
+.nav__group-submenu {
+	display: flex;
+	position: absolute;
+	z-index: 1;
+	top: 100%;
+	left: 0;
+	max-height: 0;
+	transition: max-height 0.3s;
+	background: #fff;
+	overflow: hidden;
+	box-shadow: 0px 7px 7px rgba(0, 0, 0, 0.15);
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {.nav__group-submenu {width: 500px;}} /*IE*/
+
+.nav__item.item-active .nav__group-submenu {
+	max-height: 1000px;
+	transition: max-height 1s;
+}
+
+.nav__submenu {
+	width: 250px;
+	padding: 0 24px;
+	margin: 32px 0;
+	border-right: 1px solid #E8E7E6;
+}
+
+.nav__submenu:nth-last-child(1) {
+	border: 0;
+}
+
+.nav__subitem {
+	padding: 8px;
+	text-transform: none;
+}
+
+.nav__subitem:hover {
+	background: #f1f1f1;
+}
+
+.nav__subitem-title {
+	padding: 0 8px 8px;
+	font-weight: bold;
+	text-transform: uppercase;
+	cursor: auto;
+}
+
+.nav__subitem-title:hover {
+	background: none;
+}
+
+.header__soc-block {
+	display: flex;
+	margin: 0 32px 0 0;
+	font-size: 14px;
+}
+
+.header__soc-item {
+	margin: auto 0 auto 24px;
+	list-style-position: inside;
+}
+
+.header__soc-item_share {
+	list-style-image: url(../img/ico-share.svg);
+}
+
+.header__soc-item_follow {
+	list-style-image: url(../img/ico-follow.svg);
+}
+
+
+
+
+
+@media (max-width: 1500px) {
+
+	.nav {
+		width: 100%;
+		font-size: 14px;
+		order: 3;
+	}
+
+	.nav__submenu {
+		width: 200px;
+		padding: 0;
+	}
+
+}
+
+
+
+
+
+@media (max-width: 1200px) {
+
+	.page.burger-active {
+		overflow: hidden;
+	}
+
+	@keyframes on {
+		0% {height: 50px; overflow: hidden;}
+		100% {height: 100%; overflow: auto;}
+	}
+
+	.header.burger-active {
+		animation: on 0.7s ;
+	}
+
+	@keyframes off {
+		0% {height: 100%; overflow: auto;}
+		100% {height: 50px; overflow: hidden;}
+	}
+
+	.header.burger-off {
+		animation: off 0.7s ;
+	}
+
+	.header.burger-active {
+		height: 100%;
+		overflow: auto;
+	}
+
+	.burger {
+		display: block;
+	}
+
+	.burger.burger-active:before {
+		top: 40%;
+		transform: rotate(45deg);
+		transition: top 0.3s, transform 0.3s 0.3s;
+	}
+
+	.burger.burger-active .burger__center-line {
+		transform: scale(0);
+	}
+
+	.burger.burger-active:after {
+		bottom: 40%;
+		transform: rotate(-45deg);
+		transition: bottom 0.3s, transform 0.3s 0.3s;
+	}
+
+	.nav__menu {
+		display: block;
+		max-height: 0;
+		overflow: hidden;
+	}
+
+	.nav__menu.burger-active {
+		max-height: 1000px;
+		overflow: visible;
+	}
+
+	.nav__item {
+		padding: 6px;
+	}
+
+	.nav__group-submenu {
+		width: 100%;
+	}
+
+}
+
+
+
+
+
+@media (max-width: 900px) {
+
+	.nav__submenu {
+		max-width: 250px;
+	}
+
+	.header__soc-block {
+		font-size: 12px;
+	}
+
+}
+
+
+
+
+
+@media (max-width: 600px) {
+
+	.header__soc-block {
+		display: block;
+	}
+
+}
+/* end Шапка страницы */
